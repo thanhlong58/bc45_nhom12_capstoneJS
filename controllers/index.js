@@ -55,9 +55,16 @@ function renDerSP (mangSp) {
                 </ul>
                 <a style="text-decoration: none;" class="add-to-cart" href="#"  onclick= "themCart(${sp.id});return false;">Add to cart</a>
             </div>
+ 
+            
             <div class="product-content">
-                <h3 class="title"><a style="text-decoration: none;" href="#">Women's Designer Top</a></h3>
-                <span class="price">$599.99</span>
+            <i class="fa fa-star text-warning" style="text-align: center;"></i>
+            <i class="fa fa-star text-warning" style="text-align: center;"></i>
+            <i class="fa fa-star text-warning" style="text-align: center;"></i>
+            <i class="fa fa-star text-warning" style="text-align: center;"></i>
+            <i class="fa fa-star text-warning" style="text-align: center;"></i>
+                <h3 class="title"><a style="text-decoration: none;" href="#">${sp.name}</a></h3>
+                <span class="price">${sp.price}</span>
             </div>
         </div>
     </div>
@@ -76,41 +83,12 @@ function renDerSP (mangSp) {
 
 //slideshow
 
-const imgs = document.querySelectorAll(".container img");
-const dots = document.querySelectorAll(".dot i");
-const leftArrow = document.querySelector(".arrow-left");
-const rightArrow = document.querySelector(".arrow-right");
+var angle = 0;
+function galleryspin(sign) { 
+spinner = document.querySelector("#spinner");
+if (!sign) { angle = angle + 45; } else { angle = angle - 45; }
+spinner.setAttribute("style","-webkit-transform: rotateY("+ angle +"deg); -moz-transform: rotateY("+ angle +"deg); transform: rotateY("+ angle +"deg);");
+}
 
-let currentIndex = 0;
-let time = 5000; // default time for auto slideshow
+//header
 
-const defClass = (startPos, index) => {
-  for (let i = startPos; i < imgs.length; i++) {
-    imgs[i].style.display = "none";
-    dots[i].classList.remove("fa-dot-circle");
-    dots[i].classList.add("fa-circle");
-  }
-  imgs[index].style.display = "block";
-  dots[index].classList.add("fa-dot-circle");
-};
-
-defClass(1, 0);
-
-leftArrow.addEventListener("click", function(){
-  currentIndex <= 0 ? currentIndex = imgs.length-1 : currentIndex--;
-  defClass(0, currentIndex);
-});
-
-rightArrow.addEventListener("click", function(){
-  currentIndex >= imgs.length-1 ? currentIndex = 0 : currentIndex++;
-  defClass(0, currentIndex);
-});
-
-const startAutoSlide = () => {
-  setInterval(() => {
-    currentIndex >= imgs.length-1 ? currentIndex = 0 : currentIndex++;
-    defClass(0, currentIndex);
-  }, time);
-};
-
-startAutoSlide(); // Start the slideshow

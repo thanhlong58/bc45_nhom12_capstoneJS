@@ -185,7 +185,7 @@ function renderRelatedItems (mangRelated) {
         
        
        
-        <div class="col-md-3 col-sm-6"  onclick="window.location='./detail.html?productid=${relatedItem.id}';">
+        <div class="col-md-4 col-sm-6"  onclick="window.location='./detail.html?productid=${relatedItem.id}';">
        
             <div class="product-grid2">
                 <div class="product-image2">
@@ -201,8 +201,13 @@ function renderRelatedItems (mangRelated) {
                     <a class="add-to-cart" href="#" onclick="event.stopPropagation(); event.preventDefault(); themCart(${relatedItem.id});">Add to cart</a>
                 </div>
                 <div class="product-content">
-                    <h3 class="title"><a href="#">Women's Designer Top</a></h3>
-                    <span class="price">$599.99</span>
+                <i class="fa fa-star text-warning" style="text-align: center;"></i>
+            <i class="fa fa-star text-warning" style="text-align: center;"></i>
+            <i class="fa fa-star text-warning" style="text-align: center;"></i>
+            <i class="fa fa-star text-warning" style="text-align: center;"></i>
+            <i class="fa fa-star text-warning" style="text-align: center;"></i>
+                    <h3 class="title"><a href="#">${relatedItem.name}</a></h3>
+                    <span class="price">$${relatedItem.price}</span>
                 </div>
             </div>
         </div>
@@ -309,7 +314,7 @@ function renderCart (mangCart) {
 
                     <td id="tong-tien${cartSneaker.id}" >${tongTien}</td>
                     <td>
-                      <a href="#" class="btn btn-danger btn-sm">
+                      <a href="#" class="btn btn-danger btn-sm" onclick="xoaCartItem(${cartSneaker.id})"  >
                         <i class="fa fa-times"></i>
                        </a>
                     </td>
@@ -323,6 +328,9 @@ function renderCart (mangCart) {
     return htmlContent;
     
 }
+
+
+
  //cong item
 // function increment(spId) {
 //   console.log(spId);
@@ -412,6 +420,7 @@ function decrement(spId) {
 //gia tri gio hang
 function soLuongGioHang(mangGioHang) {
     
+    
 let tongSl = mangGioHang.reduce((tsl,prod) => {
 
     tsl = tsl + prod.quantity;
@@ -420,6 +429,28 @@ let tongSl = mangGioHang.reduce((tsl,prod) => {
 document.querySelector('#soLuongSP').innerHTML = tongSl;
 
 }
+
+
+//xoa san pham trong gio hang
+
+function xoaCartItem(spId) {
+    console.log(spId);
+    let indexDel = arrCart.findIndex(prod => prod.id === spId );
+    if(indexDel!== -1) {
+        arrCart.splice(indexDel,1);
+        renderCart(arrCart);
+        soLuongGioHang(arrCart)
+    }
+}
+
+//checkout 
+document.querySelector('#checkout').onclick = function (){
+    arrCart = [];
+    soLuongGioHang(arrCart);
+    renderCart(arrCart);
+
+}
+
 
 
 

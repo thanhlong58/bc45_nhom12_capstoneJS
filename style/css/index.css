@@ -1,153 +1,30 @@
-/*===== GOOGLE FONTS =====*/
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+/*header*/
+#cart-button {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  /* background-color: transparent; */
 
-/*===== VARIABLES CSS =====*/
-:root {
-  --dark-color-lighten: #f2f5ff;
-  --red-card: #a62121;
-  --blue-card: #4bb7e6;
-  --btn: #141414;
-  --btn-hover: #3a3a3a;
-  --text: #fbf7f7;
+cursor: pointer;
+}
+#cart-icon{
+  padding: 10px 30px;
 }
 
-/*===== RESET =====*/
-*,
-::before,
-::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  height: 100vh;
-  width: 100vw;
-  background-color: var(--dark-color-lighten);
-  font-family: "Montserrat", sans-serif;
-}
-button {
-  font-family: "Montserrat", sans-serif;
+#soLuongSP {
+  position: absolute; /* set the position of the cart-count span to absolute */
+top: -10px; /* move the span slightly outside the button */
+right: -10px; /* move the span to the top right corner of the button */
   display: inline-block;
-  border: none;
-  outline: none;
-  border-radius: 0.2rem;
-  color: var(--text);
-  cursor: pointer;
-}
-
-a {
-  text-decoration: none;
-}
-
-img {
-  max-width: 100%;
-  height: 100%;
-  user-select: none;
-}
-
-/*===== CARD =====*/
-.container {
-  height: 100%;
-  width: 850px;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-.card {
-  position: relative;
-  padding: 1rem;
-  width: 350px;
-  height: 450px;
-  box-shadow: -1px 15px 30px -12px rgb(32, 32, 32);
-  border-radius: 0.9rem;
-  background-color: var(--red-card);
-  color: var(--text);
-  cursor: pointer;
-}
-
-.card-blue {
-  background: var(--blue-card);
-}
-
-.product-image {
-  height: 230px;
-  width: 100%;
-  transform: translate(0, -1.5rem);
-  transition: transform 500ms ease-in-out;
-  filter: drop-shadow(5px 10px 15px rgba(8, 9, 13, 0.4));
-}
-.product-info {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #f0c14b;
+  color: #fff;
+  font-size: 14px;
+  line-height: 20px;
   text-align: center;
-}
-
-.card:hover .product-image {
-  transform: translate(-1rem, -5rem) rotate(-20deg);
-}
-
-.product-info h2 {
-  font-size: 1.4rem;
-  font-weight: 600;
-}
-.product-info p {
-  margin: 0.4rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-.price {
-  font-size: 1.2rem;
-  font-weight: 500;
-}
-.btn {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-top: 0.8rem;
-}
-.buy-btn {
-  background-color: var(--btn);
-  padding: 0.6rem 3.5rem;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: 300ms ease;
-}
-.buy-btn:hover {
-  background-color: var(--btn-hover);
-}
-.fav {
-  box-sizing: border-box;
-  background: #fff;
-  padding: 0.5rem 0.5rem;
-  border: 1px solid#000;
-  display: grid;
-  place-items: center;
-}
-
-.svg {
-  height: 25px;
-  width: 25px;
-  fill: #fff;
-  transition: all 500ms ease;
-}
-
-.fav:hover .svg {
-  fill: #000;
-}
-
-@media screen and (max-width: 800px) {
-  body {
-    height: auto;
-  }
-  .container {
-    padding: 2rem 0;
-    width: 100%;
-    flex-direction: column;
-    gap: 3rem;
-  }
+  margin-right: 10px;
 }
 
 /*list*/
@@ -182,3 +59,47 @@ img {
 .product-grid2 .price{color:#303030;font-size:15px}
 @media screen and (max-width:990px){.product-grid2{margin-bottom:30px}
 }
+
+
+/*carousel*/
+div#carousel { 
+  perspective: 1200px; 
+  background: #100000; 
+  padding-top: 10%; 
+  font-size:0; 
+  margin-bottom: 3rem; 
+  overflow: hidden; 
+}
+figure#spinner { 
+  transform-style: preserve-3d; 
+  height: 300px; 
+  transform-origin: 50% 50% -500px; 
+  transition: 1s; 
+} 
+figure#spinner img { 
+  width: 40%; max-width: 425px; 
+  position: absolute; left: 30%;
+  transform-origin: 50% 50% -500px;
+  outline:1px solid transparent; 
+}
+figure#spinner img:nth-child(1) { transform:rotateY(0deg); 
+}
+figure#spinner img:nth-child(2) { transform: rotateY(-45deg); }
+figure#spinner img:nth-child(3) { transform: rotateY(-90deg); }
+figure#spinner img:nth-child(4) { transform: rotateY(-135deg); }
+figure#spinner img:nth-child(5){ transform: rotateY(-180deg); }
+figure#spinner img:nth-child(6){ transform: rotateY(-225deg); }
+figure#spinner img:nth-child(7){ transform: rotateY(-270deg); }
+figure#spinner img:nth-child(8){ transform: rotateY(-315deg); }
+div#carousel ~ span { 
+  color: #fff; 
+  margin: 5%; 
+  display: inline-block; 
+  text-decoration: none; 
+  font-size: 2rem; 
+  transition: 0.6s color; 
+  position: relative; 
+  margin-top: -6rem; 
+  border-bottom: none; 
+  line-height: 0; }
+div#carousel ~ span:hover { color: #888; cursor: pointer; }

@@ -8,6 +8,7 @@
 
   <title>Bai tap capstone js</title>
   <!--slideshow-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
   <!--fontawsome-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -24,49 +25,80 @@
 </head>
 
 <body>
+  <header class="header" id="header">
+    <nav class="navbar container">
+       <a href="./index.html" class="brand">Home</a>
+       <div class="burger" id="burger">
+          <span class="burger-line"></span>
+          <span class="burger-line"></span>
+          <span class="burger-line"></span>
+       </div>
+       <div class="menu" id="menu">
+          <ul class="menu-inner">
+             <li class="menu-item"><a href="#" class="menu-link">Men</a></li>
+             <li class="menu-item"><a href="#" class="menu-link">Women</a></li>
+             <li class="menu-item"><a href="#" class="menu-link">Kids</a></li>
+             <li class="menu-item"><a href="#" class="menu-link">Custom</a></li>
+             <li class="menu-item"><a href="#" class="menu-link">Sale</a></li>
+          </ul>
+       </div>
 
-  <div class="container">
-    <div class="arrow arrow-left"><i class="fas fa-chevron-circle-left"></i></div>
-    <img src="https://wallpaperaccess.com/full/1597835.jpg" alt="">
-    <img
-      src="https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77702040507.jpg"
-      alt="">
-    <img
-      src="https://assets.website-files.com/5dfd2203d08cf403964198c2/628386ca93e36e121090aa1f_6282b915390b4c6ff279f5aa_9BtfpfXoq8IIfmMgbq4aT2oF26zCkDkjlk0lVJiYZoQJO9bVG4o2EW_C9S7qeH2Q2o6GS_FLje9UzWOS9pvwwBWLP2oH-Zu1VbNzcWT3hbgAQOefiM6fQ111sT493s7Dz2LiLWvm.png"
-      alt="">
-    <div class="arrow arrow-right"><i class="fas fa-chevron-circle-right"></i>
-    </div>
-    <div class="dots">
-      <div class="dot">
-        <i class="far fa-dot-circle"></i>
-      </div>
-      <div class="dot">
-        <i class="far fa-circle"></i>
-      </div>
-      <div class="dot">
-        <i class="far fa-circle"></i>
-      </div>
-    </div>
-  </div>
+       <div class="contact">
+        <a href="/register.html" class="sign-up">Sign up</a>
+          <div class="cart-bag">
+             <button id="cart-button" type="button" class="btn btn-dark rounded-circle" data-toggle="modal" data-target="#cartModal">
+                <span><i id="cart-id" class="fa fa-shopping-cart"><span id="soLuongSP">0</span></i></span>
+             </button>
+          </div>
+       </div>
+       <button class=""><i class="bx bx-shopping-bag"></i></button>
+    </nav>
+ </header>
+
+ <base href="/img/giày-nike-air-max-90-love-letter-dd8029-100-king-shoes-sneaker-real-hcm-12-1638423994.jpeg">
+ <div id="carousel">
+   <figure id="spinner">
+     <img src="/img/1.jpg" alt>
+     <img src="/img/2.jpg" alt>
+     <img src="/img/3.jpg" alt>
+     <img src="/img/4.jpg" alt>
+     <img src="/img/5.jpg" alt>
+     <img src="/img/1.jpg" alt>
+     <img src="/img/1.jpg" alt>
+     <img src="/img/1.jpg" alt>
+   </figure>
+ </div>
+ <span style="float:left" class="ss-icon" onclick="galleryspin('-')">&lt;</span>
+ <span style="float:right" class="ss-icon" onclick="galleryspin('')">&gt;</span>
 
 
+   
 
-  <i class="fa-solid fa-cart-circle-plus"></i>
+ 
+
+ 
+
+  
+  
 
 
+ 
 
-  <div class="container-fluid">
+
+  
+ <div class="container">
     <div class="row" id="dsSp">
 
     </div>
   </div>
+
+
+  
   
 
 
 
-  <div id="product-item">
-   
-</div>
+  
 
 
 
@@ -74,9 +106,9 @@
 
 
 
-
-
-
+  <!--codepen-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
   <!--axios-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.5/axios.min.js"
     integrity="sha512-nnNHpffPSgINrsR8ZAIgFUIMexORL5tPwsfktOTxVYSv+AUAILuFYWES8IHl+hhIhpFGlKvWFiz9ZEusrPcSBQ=="
