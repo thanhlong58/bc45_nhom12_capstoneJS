@@ -2,15 +2,9 @@
 document.querySelector('#btnSubmit').onclick = function() {
     console.log(123);
     var user = new User ();
-    const selectedGender = document.querySelector('input[name="gender"]:checked').value;
-    console.log(selectedGender);
-  var gioiTinh = true;
-   if(selectedGender === 'female'){
-     gioiTinh = false
-    
-   }else if(selectedGender === 'male') {
-     gioiTinh = true;
-   }
+   
+   
+  
 
 // console.log(gioiTinh);
     
@@ -18,10 +12,10 @@ document.querySelector('#btnSubmit').onclick = function() {
     
     
     user.email = document.querySelector('#email').value ;
-    user.name = document.querySelector('#fullname').value ;
+    user.name = document.querySelector('#name').value ;
     user.passWord = document.querySelector('#password').value ;
     user.phone = document.querySelector('#phone').value ;
-    user.gender = gioiTinh ;
+    
     console.log(user);
    
 
@@ -43,3 +37,12 @@ document.querySelector('#btnSubmit').onclick = function() {
         console.log(err);
     })
 }
+
+const form = document.getElementById('registration-form');
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const formData = new FormData(form);
+  console.log(Object.fromEntries(formData));
+  // You can send the form data to a server using an AJAX request or fetch()
+});
