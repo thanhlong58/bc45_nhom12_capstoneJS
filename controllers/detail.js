@@ -127,7 +127,7 @@ function renderDetail (mangSP) {
            </div>
            <div class="wrapper-content">
               <div class="wrapper-inform">
-                 <span class="badge badge-darken">Man's Shoes</span>
+                
                  <h1 class="heading-sm font-bold">${sp.name}</h1>
                  <p class="text-md font-regular">
                    ${sp.description}
@@ -390,31 +390,32 @@ function increment(spId) {
 
 //tru item
 function decrement(spId) {
-    
     console.log(spId);
-
     let tien1Mon = 0;
     let tongTien = 0;
-    
+  
     for (let i = 0; i < arrCart.length; i++) {
       let sp = arrCart[i];
-      
+  
       if (sp.id == spId) {
         console.log(sp);
-        sp.quantity--;
-        
-        document.querySelector(`#input${spId}`).value = sp.quantity;
-        
-        tien1Mon = sp.price * sp.quantity;
-        
-        document.querySelector(`#tong-tien${spId}`).innerHTML = tien1Mon;
+  
+        // prevent quantity from becoming negative
+        if (sp.quantity > 0) {
+          sp.quantity--;
+          document.querySelector(`#input${spId}`).value = sp.quantity;
+          tien1Mon = sp.price * sp.quantity;
+          document.querySelector(`#tong-tien${spId}`).innerHTML = tien1Mon;
+        }
       }
-      
+  
       tongTien += sp.price * sp.quantity;
     }
-    soLuongGioHang(arrCart);   
+  
+    soLuongGioHang(arrCart);
     document.querySelector('#bill').innerHTML = tongTien;
   }
+  
 
 
 //gia tri gio hang

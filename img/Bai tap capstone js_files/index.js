@@ -40,7 +40,7 @@ function renDerSP (mangSp) {
     for (var index= 0 ; index < mangSp.length;index++ ) {
         var sp = mangSp [index];
         htmlContent +=`
-        <div class="col-xl-2 col-md-3 col-sm-6 col-12"  onclick="window.location='./detail.html?productid=${sp.id}';">
+        <div class="col-md-2 col-sm-6"  onclick="window.location='./detail.html?productid=${sp.id}';">
        
         <div class="product-grid2">
             <div class="product-image2">
@@ -64,7 +64,7 @@ function renDerSP (mangSp) {
             <i class="fa fa-star text-warning" style="text-align: center;"></i>
             <i class="fa fa-star text-warning" style="text-align: center;"></i>
                 <h3 class="title"><a style="text-decoration: none;" href="#">${sp.name}</a></h3>
-                <span class="price">$${sp.price}</span>
+                <span class="price">${sp.price}</span>
             </div>
         </div>
     </div>
@@ -146,10 +146,3 @@ document.querySelector('#chonSP').onchange = function () {
   
 
 }
-
-
-
-
-//switch theme
-
-
