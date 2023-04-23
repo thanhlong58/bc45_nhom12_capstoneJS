@@ -625,7 +625,7 @@ div#carousel ~ span:hover {
 }
 
 .grow {
-  box-shadow: 0px 10px -14px 14px #FFF;
+  box-shadow: 5px 5px 15px 50px rgba(0, 0, 0, 0.98);
   display: inline-block;
   position: relative;
   transition-duration: 0.3s;

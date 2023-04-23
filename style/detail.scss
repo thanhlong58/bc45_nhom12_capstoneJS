@@ -1,4 +1,30 @@
 
+// Default options
+$defaultDuration: .3s;
+$primaryColour: #ececec;
+$secondaryColour: #666;
+$shadowColour: rgba(0, 0, 0, .6);
+
+
+
+// As is often the case, some devices/browsers need additional code to get CSS to work
+// in the most desired way. These mixins are used to quickly drop in hacks for each element
+@mixin hideTapHighlightColor() {
+	//Prevent highlight colour when element is tapped
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+@mixin hardwareAccel() {
+	//Improve performance on mobile/tablet devices
+	transform: translateZ(0);
+}
+
+@mixin improveAntiAlias() {
+	//Improve aliasing on mobile/tablet devices
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+
+
 
 /*cart-bag (detail.htmk)*/
   /*cart bag*/
@@ -308,6 +334,42 @@ img {
 }
 
 // Header Section
+
+.float-shadow {
+   display: inline-block;
+	position: relative;
+	transition-duration: $defaultDuration;
+	transition-property: transform;
+
+	@include hideTapHighlightColor();
+	@include hardwareAccel();
+	@include improveAntiAlias();
+
+	&:before {
+		pointer-events: none;
+	  position: absolute;
+	  z-index: -1;
+	  content: '';
+	  top: 100%;
+	  left: 5%;
+	  height: 10px;
+	  width: 90%;
+	  opacity: 0;
+	  background: radial-gradient(ellipse at center, rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 80%); /* W3C */
+		transition-duration: $defaultDuration;
+		transition-property: transform opacity;
+	}
+
+	&:hover {
+		transform: translateY(-5px); /* move the element up by 5px */
+
+		&:before {
+			opacity: 1;
+			transform: translateY(5px); /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
+		}
+	}
+
+}
 .header {
   
    position: fixed;
@@ -588,3 +650,155 @@ img {
       }
    }
 }
+
+//footer
+
+.site-footer {
+   background-color: #26272b;
+   padding: 45px 0 20px;
+   font-size: 15px;
+   line-height: 24px;
+   color: #737373;
+ 
+   hr {
+     border-top-color: #bbb;
+     opacity: 0.5;
+   }
+ 
+   hr.small {
+     margin: 20px 0;
+   }
+ 
+   h6 {
+     color: #fff;
+     font-size: 16px;
+     text-transform: uppercase;
+     margin-top: 5px;
+     letter-spacing: 2px;
+   }
+ 
+   a {
+     color: #737373;
+ 
+     &:hover {
+       color: #3366cc;
+       text-decoration: none;
+     }
+   }
+ 
+   .footer-links {
+     padding-left: 0;
+     list-style: none;
+ 
+     li {
+       display: block;
+ 
+       a {
+         text-decoration: none;
+         color: #737373;
+ 
+         &:active,
+         &:focus,
+         &:hover {
+           color: #3366cc;
+           text-decoration: none;
+         }
+       }
+     }
+ 
+     &.inline li {
+       display: inline-block;
+     }
+   }
+ 
+   .social-icons {
+     text-align: right;
+     padding-left: 0;
+     margin-bottom: 0;
+     list-style: none;
+ 
+     li {
+       display: inline-block;
+       margin-bottom: 4px;
+ 
+       &.title {
+         margin-right: 15px;
+         text-transform: uppercase;
+         color: #96a2b2;
+         font-weight: 700;
+         font-size: 13px;
+       }
+ 
+       a {
+         background-color: #eceeef;
+         color: #818a91;
+         font-size: 16px;
+         display: inline-block;
+         line-height: 44px;
+         width: 44px;
+         height: 44px;
+         text-align: center;
+         margin-right: 8px;
+         border-radius: 100%;
+         transition: all 0.2s linear;
+ 
+         &:active,
+         &:focus,
+         &:hover {
+           color: #fff;
+           background-color: #29aafe;
+         }
+ 
+         &.facebook:hover {
+           background-color: #3b5998;
+         }
+ 
+         &.twitter:hover {
+           background-color: #00aced;
+         }
+ 
+         &.linkedin:hover {
+           background-color: #007bb6;
+         }
+ 
+         &.dribbble:hover {
+           background-color: #ea4c89;
+         }
+       }
+ 
+       &.size-sm a {
+         text-decoration: none;
+         line-height: 34px;
+         height: 34px;
+         width: 34px;
+         font-size: 14px;
+       }
+     }
+   }
+ 
+   .copyright-text {
+     margin: 0;
+   }
+ 
+   @media (max-width: 991px) {
+     [class^="col-"] {
+       margin-bottom: 30px;
+     }
+   }
+ 
+   @media (max-width: 767px) {
+     padding-bottom: 0;
+ 
+     .copyright-text,
+     .social-icons {
+       text-align: center;
+     }
+ 
+     .social-icons li.title {
+       display: block;
+       margin-right: 0;
+       font-weight: 600;
+     }
+   }
+ }
+ 

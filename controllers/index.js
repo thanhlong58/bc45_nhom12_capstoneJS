@@ -49,11 +49,10 @@ function renDerSP (mangSp) {
                     <img class="pic-2" src="${sp.image}">
                 </a>
                 <ul class="social">
-                    <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
-                    <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
-                    <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                    <li><a href="#" data-tip=""><i class="fa fa-eye"></i></a></li>
+                     <li><a href="#" data-tip="Like"><i class="fa fa-heart"></i></i></a></li>
                 </ul>
-                <a style="text-decoration: none;" class="add-to-cart" href="#"  onclick= "themCart(${sp.id});return false;">Add to cart</a>
+                <a style="text-decoration: none;" class="add-to-cart" href="#"  onclick= "themCart(${sp.id});return false;">Buy now</a>
             </div>
  
             
