@@ -1,25 +1,13 @@
 //post user
 document.querySelector('#btnSubmit').onclick = function() {
-    console.log(123);
-    var user = new User ();
-   
-   
-  
-
-// console.log(gioiTinh);
-    
-
-    
-    
-    user.email = document.querySelector('#email').value ;
-    user.name = document.querySelector('#name').value ;
-    user.passWord = document.querySelector('#password').value ;
-    user.phone = document.querySelector('#phone').value ;
+    userEmail = document.querySelector('#email').value ;
+    userName = document.querySelector('#name').value ;
+    userPassWord = document.querySelector('#password').value ;
+    userConfirm = document.querySelector('#password-confirm').value ;
+    userPhone = document.querySelector('#phone').value ;
     
     console.log(user);
    
-
-
     var promise = axios ({
         url : 'https://shop.cyberlearn.vn/api/Users/signup',
         method : 'POST',
@@ -28,9 +16,7 @@ document.querySelector('#btnSubmit').onclick = function() {
     })
 
     promise.then(function(result){
-        console.log(result.data.content);
-        alert('dang ky thanh cong');
-        
+        console.log(result.data.content);        
     })
 
     promise.catch(function(err){
@@ -38,11 +24,28 @@ document.querySelector('#btnSubmit').onclick = function() {
     })
 }
 
-const form = document.getElementById('registration-form');
+const form = document.getElementById('form');
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
-  const formData = new FormData(form);
+if ( 
+    userEmail =="" || userName=="" ||  userPassWord=="" ||  userPhone==""
+) {
+    alert ("Vui lòng không để trống");
+} else if (userPassWord !== userConfirm ){
+    alert ("Mật khẩu không khớp!")
+}else {
+    const formData = {
+        userName,
+        userEmail,
+        userPhone
+    };
+      let json = JSON.stringify(formData);
+      localStorage.setItem(userName, json);
+      alert("Đăng ký thành công!");
+}
   console.log(Object.fromEntries(formData));
   // You can send the form data to a server using an AJAX request or fetch()
 });
+
+

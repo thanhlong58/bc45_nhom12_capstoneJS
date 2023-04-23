@@ -378,7 +378,7 @@ img {
   }
 }
 
-.contact .sign-up {
+.contact .sign-up, .log-in {
   text-decoration: none;
   font-family: inherit;
   font-size: var(--text-sm);
@@ -387,6 +387,9 @@ img {
   color: var(--black-500);
   text-transform: uppercase;
   transition: all 0.3s ease;
+}
+.contact .sign-up:hover, .log-in {
+  color: red;
 }
 
 .burger {
