@@ -153,7 +153,7 @@ function renderDetail (mangSP) {
                  </div>
               </div>
               <div class="wrapper-action">
-                 <button class="btn btn-darken"  onclick= "themCart(${sp.id});return false;">Add to Bag</button>
+                 <button class="btn btn-darken"  onclick= "themCart(${sp.id});return false;">Add to Cart</button>
                  <button class="btn btn-neutral">
                     <i class="bx bx-heart"></i>
                  </button>
@@ -276,10 +276,13 @@ function addItem(item) {
   if (existingItem) {
     existingItem.quantity++;
     console.log(existingItem.quantity);
+    
   } else {
     item.quantity = 1;
     arrCart.push(item);
+    
   }
+  saveStorage();
 }
 
  //render gio hang
@@ -361,6 +364,7 @@ function renderCart (mangCart) {
 // document.querySelector('#bill').innerHTML = tongTien;
 // }
 function increment(spId) {
+   
     
     console.log(spId);
     let tien1Mon = 0;
@@ -382,14 +386,17 @@ function increment(spId) {
       
       tongTien += sp.price * sp.quantity;
     }
+    
     soLuongGioHang(arrCart)
     document.querySelector('#bill').innerHTML = tongTien;
+    saveStorage();
   }
 
 
 
 //tru item
 function decrement(spId) {
+   
     console.log(spId);
     let tien1Mon = 0;
     let tongTien = 0;
@@ -411,9 +418,12 @@ function decrement(spId) {
   
       tongTien += sp.price * sp.quantity;
     }
+
+    
   
     soLuongGioHang(arrCart);
     document.querySelector('#bill').innerHTML = tongTien;
+    saveStorage()
   }
   
 
@@ -422,10 +432,11 @@ function decrement(spId) {
 function soLuongGioHang(mangGioHang) {
     
     
+    
 let tongSl = mangGioHang.reduce((tsl,prod) => {
 
     tsl = tsl + prod.quantity;
-    return tsl; //1250 2600 3050
+    return tsl; 
 }, 0);
 document.querySelector('#soLuongSP').innerHTML = tongSl;
 
@@ -442,6 +453,7 @@ function xoaCartItem(spId) {
         renderCart(arrCart);
         soLuongGioHang(arrCart)
     }
+    saveStorage();
 }
 
 //checkout 
@@ -449,10 +461,41 @@ document.querySelector('#checkout').onclick = function (){
     arrCart = [];
     soLuongGioHang(arrCart);
     renderCart(arrCart);
+    Swal.fire(
+        
+        'Successful payment',
+        
+      )
+   document.querySelector('#btnClose').click();   
+   saveStorage();
+  
 
 }
 
 
+
+//save storage 
+function saveStorage () {
+    
+    let data = JSON.stringify(arrCart);
+    localStorage.setItem('mangCart',data);
+}
+
+
+//get storage 
+function getStorage() {
+    
+    
+    if(localStorage.getItem('mangCart')) {
+        let data = localStorage.getItem('mangCart');
+        arrCart = JSON.parse(data);
+        renderCart(arrCart);
+        soLuongGioHang(arrCart);
+
+    }
+}
+
+getStorage();
 
 
 
