@@ -377,7 +377,6 @@ img {
     margin: 0 auto;
   }
 }
-
 .contact .sign-up, .log-in {
   text-decoration: none;
   font-family: inherit;
@@ -388,7 +387,7 @@ img {
   text-transform: uppercase;
   transition: all 0.3s ease;
 }
-.contact .sign-up:hover, .log-in {
+.contact .sign-up:hover,.log-in:hover {
   color: red;
 }
 
