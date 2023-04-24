@@ -524,6 +524,16 @@ img {
 }
 
 // Wrapper Section
+#img-product {
+ 
+   transition: all 1.5s ease-in-out 0s;
+   &:hover {
+       cursor: default;
+    transform: rotate(360deg);
+    transition: all 1.5s ease-in-out 0s;
+   }
+ }
+ 
 .wrapper {
    &-column {
       display: grid;

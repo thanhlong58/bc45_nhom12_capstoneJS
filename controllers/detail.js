@@ -1,5 +1,5 @@
-var arrSo = [7,8,9]
-for (index = 0 ; index< arrSo.length;index++) {
+var arrSo = [7, 8, 9]
+for (index = 0; index < arrSo.length; index++) {
     var so = arrSo[index];
     console.log(so);
 }
@@ -11,30 +11,44 @@ var relatedItems = []
 window.onload = function () {
     const urlParams = new URLSearchParams(window.location.search);
     const myParam = urlParams.get('productid');
-    console.log('params',myParam)
+    console.log('params', myParam)
 
     //call api load lên giao diện
     function laySP() {
         var promise = axios({
-            url: 'https://shop.cyberlearn.vn/api/Product/getbyid?id='+myParam,
+            url: 'https://shop.cyberlearn.vn/api/Product/getbyid?id=' + myParam,
             method: 'GET',
             ResponseType: JSON,
-    
+
         })
-    
+
         promise.then(function (res) {
             console.log(res.data.content);
             var detailItem = res.data.content;
             arrDetail.push(detailItem);
             renderDetail(arrDetail);
-            
-           
+            //click size giay 
+            const sizeItems = document.querySelectorAll('.sizes-item');
+            console.log(sizeItems);
+
+
+            sizeItems.forEach(sizeItem => {
+                sizeItem.addEventListener('click', () => {
+                    sizeItems.forEach(item => {
+                        item.classList.remove('is-select');
+                    });
+                    sizeItem.classList.add('is-select');
+                });
+            });
+
+
+
         })
         promise.catch(function (err) {
             console.log(err.data);
         })
     }
-laySP();
+    laySP();
 }
 
 
@@ -45,7 +59,7 @@ laySP();
 function layDanhSachSP() {
     const urlParams = new URLSearchParams(window.location.search);
     const myParam = urlParams.get('productid');
-    console.log('params',myParam)
+    console.log('params', myParam)
 
     var promise = axios({
         url: 'https://shop.cyberlearn.vn/api/Product',
@@ -57,30 +71,30 @@ function layDanhSachSP() {
     promise.then(function (res) {
         console.log(res.data.content);
         var mangRelated = res.data.content
-        var sneakerDetail = mangRelated[myParam-1]
+        var sneakerDetail = mangRelated[myParam - 1]
         console.log(sneakerDetail);
         console.log(sneakerDetail.relatedProducts);
         var sneakerProductRelated = sneakerDetail.relatedProducts;
-      var  arrSneakerRelated  = JSON.parse(sneakerProductRelated);
-      var sneakerSize = sneakerDetail.size
-      var arrSneakerSize = JSON.parse (sneakerSize)
-      console.log(arrSneakerSize);
-        for (var i = 0 ; i < arrSneakerRelated.length; i++ ){
-            
+        var arrSneakerRelated = JSON.parse(sneakerProductRelated);
+        var sneakerSize = sneakerDetail.size
+        var arrSneakerSize = JSON.parse(sneakerSize)
+        console.log(arrSneakerSize);
+        for (var i = 0; i < arrSneakerRelated.length; i++) {
+
             var id = arrSneakerRelated[i];
 
-            
+
             console.log(id);
-            for(var index = 0 ; index < mangRelated.length;index++) {
+            for (var index = 0; index < mangRelated.length; index++) {
                 var sneakerRelate = mangRelated[index];
-                if(sneakerRelate.id === id) {
+                if (sneakerRelate.id === id) {
                     relatedItems.push(sneakerRelate);
-                    relatedItems[i].quantity = 0 ;
-                    
-            
-                    
+                    relatedItems[i].quantity = 0;
+
+
+
                 }
-    
+
             }
 
         }
@@ -89,16 +103,16 @@ function layDanhSachSP() {
         renderRelatedItems(relatedItems);
 
         //push la detail item de xet mang add vao Cart
-        
-        
+
+
         relatedItems.push(sneakerDetail);
-        
-        
-                
-    
-       
+
+
+
+
+
     })
-    
+
     promise.catch(function (err) {
         console.log(err.data);
     })
@@ -107,23 +121,23 @@ function layDanhSachSP() {
 
 layDanhSachSP()
 
-function renderDetail (mangSP) {
-    var htmlContent ='';
-    
-    
-    
+function renderDetail(mangSP) {
+    var htmlContent = '';
 
-    for (var index= 0 ; index < mangSP.length;index++ ) {
-        
-        var sp = mangSP [index];
-        
-       
-       
-        htmlContent +=`
+
+
+
+    for (var index = 0; index < mangSP.length; index++) {
+
+        var sp = mangSP[index];
+
+
+
+        htmlContent = `
         <section class="section wrapper wrapper-section">
         <div class="container wrapper-column">
            <div class="wrapper-figure">
-              <img src="${sp.image}" class="wrapper-image" loading="lazy" alt="Sneaker">
+              <img id="img-product" src="${sp.image}" class="wrapper-image" loading="lazy" alt="Sneaker">
            </div>
            <div class="wrapper-content">
               <div class="wrapper-inform">
@@ -166,7 +180,8 @@ function renderDetail (mangSP) {
     }
 
 
-    
+
+
     document.querySelector('#detail-content').innerHTML = htmlContent;
 
     return htmlContent;
@@ -174,11 +189,11 @@ function renderDetail (mangSP) {
 
 
 
-function renderRelatedItems (mangRelated) {
-    var htmlOut= '';
+function renderRelatedItems(mangRelated) {
+    var htmlOut = '';
 
 
-    for( var index = 0; index < mangRelated.length; index++ ) {
+    for (var index = 0; index < mangRelated.length; index++) {
         var relatedItem = mangRelated[index];
         htmlOut += `
 
@@ -226,44 +241,44 @@ function renderRelatedItems (mangRelated) {
 }
 
 function themCart(masp) {
-    
-     
+
+
     console.log(masp);
     console.log(relatedItems)
-    
+
     console.log(arrCart);
 
     var indexBag = -1;
     for (var index = 0; index < relatedItems.length; index++) {
-        
-        var sneakerCart =  relatedItems[index]
-        
-        if (masp === relatedItems[index].id) {  
+
+        var sneakerCart = relatedItems[index]
+
+        if (masp === relatedItems[index].id) {
             indexBag = index;
-           
-           
+
+
             addItem(sneakerCart);
-            
+
             break;
         }
-       
+
     }
-    
-    
-    if (indexBag !==-1) {
-       
-       
+
+
+    if (indexBag !== -1) {
+
+
         renderCart(arrCart);
         soLuongGioHang(arrCart);
-         
-      
-       
-           
-         
+
+
+
+
+
     }
-    
-   
-   
+
+
+
     return false;
 }
 console.log(arrCart);
@@ -272,32 +287,32 @@ console.log(arrCart);
 //function additem
 
 function addItem(item) {
-  let existingItem = arrCart.find((i) => i.id === item.id);
-  if (existingItem) {
-    existingItem.quantity++;
-    console.log(existingItem.quantity);
-    
-  } else {
-    item.quantity = 1;
-    arrCart.push(item);
-    
-  }
-  saveStorage();
+    let existingItem = arrCart.find((i) => i.id === item.id);
+    if (existingItem) {
+        existingItem.quantity++;
+        console.log(existingItem.quantity);
+
+    } else {
+        item.quantity = 1;
+        arrCart.push(item);
+
+    }
+    saveStorage();
 }
 
- //render gio hang
-function renderCart (mangCart) {
-   
+//render gio hang
+function renderCart(mangCart) {
+
     var htmlContent = '';
     var bill = 0;
     var tongTien = 0;
-    for (index = 0 ; index < mangCart.length;index++) {
+    for (index = 0; index < mangCart.length; index++) {
         var cartSneaker = mangCart[index];
-       
-       
-       tongTien = cartSneaker.price * cartSneaker.quantity  ;
-       
-       bill += tongTien;
+
+
+        tongTien = cartSneaker.price * cartSneaker.quantity;
+
+        bill += tongTien;
         htmlContent += `
         
         <tr>
@@ -305,7 +320,7 @@ function renderCart (mangCart) {
                       <img src="${cartSneaker.image}" alt="Sheep" style="width:20px; height: 30px;" =>
                     </td>
                     <td>${cartSneaker.name}</td>
-                    <td>${cartSneaker.price }</td>
+                    <td>${cartSneaker.price}</td>
                     
                     <td class="qty w-25">
                       <span style="white-space: nowrap;">
@@ -323,122 +338,122 @@ function renderCart (mangCart) {
                     </td>
         </tr>
         `
-        
+
     }
-    
-    document.querySelector('#listCart').innerHTML= htmlContent;
+
+    document.querySelector('#listCart').innerHTML = htmlContent;
     document.querySelector('#bill').innerHTML = bill;
     return htmlContent;
-    
+
 }
 
 
 
- //cong item
+//cong item
 // function increment(spId) {
 //   console.log(spId);
 //   let tien1Mon = 0;
 //   let tongTien  =0;
-  
+
 //      for(let i  = 0 ; i< arrCart.length; i++) {
 //     let sp = arrCart[i];
-    
+
 //     if (sp.id == spId) {
 //         console.log(sp);
 //         sp.quantity++;
-        
-        
+
+
 
 //         document.querySelector(`#input${spId}`).value = sp.quantity;
-        
+
 //         tien1Mon = sp.price * sp.quantity;
-       
-        
-         
+
+
+
 //         document.querySelector(`#tong-tien${spId}`).innerHTML = tien1Mon;
-        
-     
+
+
 //        }
 //       tongTien += tien1Mon;
 // }
 // document.querySelector('#bill').innerHTML = tongTien;
 // }
 function increment(spId) {
-   
-    
+
+
     console.log(spId);
     let tien1Mon = 0;
     let tongTien = 0;
-    
+
     for (let i = 0; i < arrCart.length; i++) {
-      let sp = arrCart[i];
-      
-      if (sp.id == spId) {
-        console.log(sp);
-        sp.quantity++;
-        
-        document.querySelector(`#input${spId}`).value = sp.quantity;
-        
-        tien1Mon = sp.price * sp.quantity;
-        
-        document.querySelector(`#tong-tien${spId}`).innerHTML = tien1Mon;
-      }
-      
-      tongTien += sp.price * sp.quantity;
+        let sp = arrCart[i];
+
+        if (sp.id == spId) {
+            console.log(sp);
+            sp.quantity++;
+
+            document.querySelector(`#input${spId}`).value = sp.quantity;
+
+            tien1Mon = sp.price * sp.quantity;
+
+            document.querySelector(`#tong-tien${spId}`).innerHTML = tien1Mon;
+        }
+
+        tongTien += sp.price * sp.quantity;
     }
-    
+
     soLuongGioHang(arrCart)
     document.querySelector('#bill').innerHTML = tongTien;
     saveStorage();
-  }
+}
 
 
 
 //tru item
 function decrement(spId) {
-   
+
     console.log(spId);
     let tien1Mon = 0;
     let tongTien = 0;
-  
+
     for (let i = 0; i < arrCart.length; i++) {
-      let sp = arrCart[i];
-  
-      if (sp.id == spId) {
-        console.log(sp);
-  
-        // prevent quantity from becoming negative
-        if (sp.quantity > 0) {
-          sp.quantity--;
-          document.querySelector(`#input${spId}`).value = sp.quantity;
-          tien1Mon = sp.price * sp.quantity;
-          document.querySelector(`#tong-tien${spId}`).innerHTML = tien1Mon;
+        let sp = arrCart[i];
+
+        if (sp.id == spId) {
+            console.log(sp);
+
+            // prevent quantity from becoming negative
+            if (sp.quantity > 0) {
+                sp.quantity--;
+                document.querySelector(`#input${spId}`).value = sp.quantity;
+                tien1Mon = sp.price * sp.quantity;
+                document.querySelector(`#tong-tien${spId}`).innerHTML = tien1Mon;
+            }
         }
-      }
-  
-      tongTien += sp.price * sp.quantity;
+
+        tongTien += sp.price * sp.quantity;
     }
 
-    
-  
+
+
     soLuongGioHang(arrCart);
     document.querySelector('#bill').innerHTML = tongTien;
     saveStorage()
-  }
-  
+}
+
 
 
 //gia tri gio hang
 function soLuongGioHang(mangGioHang) {
-    
-    
-    
-let tongSl = mangGioHang.reduce((tsl,prod) => {
 
-    tsl = tsl + prod.quantity;
-    return tsl; 
-}, 0);
-document.querySelector('#soLuongSP').innerHTML = tongSl;
+
+
+    let tongSl = mangGioHang.reduce((tsl, prod) => {
+
+        tsl = tsl + prod.quantity;
+        return tsl;
+    }, 0);
+    document.querySelector('#soLuongSP').innerHTML = tongSl;
 
 }
 
@@ -447,9 +462,9 @@ document.querySelector('#soLuongSP').innerHTML = tongSl;
 
 function xoaCartItem(spId) {
     console.log(spId);
-    let indexDel = arrCart.findIndex(prod => prod.id === spId );
-    if(indexDel!== -1) {
-        arrCart.splice(indexDel,1);
+    let indexDel = arrCart.findIndex(prod => prod.id === spId);
+    if (indexDel !== -1) {
+        arrCart.splice(indexDel, 1);
         renderCart(arrCart);
         soLuongGioHang(arrCart)
     }
@@ -457,36 +472,36 @@ function xoaCartItem(spId) {
 }
 
 //checkout 
-document.querySelector('#checkout').onclick = function (){
+document.querySelector('#checkout').onclick = function () {
     arrCart = [];
     soLuongGioHang(arrCart);
     renderCart(arrCart);
     Swal.fire(
-        
+
         'Successful payment',
-        
-      )
-   document.querySelector('#btnClose').click();   
-   saveStorage();
-  
+
+    )
+    document.querySelector('#btnClose').click();
+    saveStorage();
+
 
 }
 
 
 
 //save storage 
-function saveStorage () {
-    
+function saveStorage() {
+
     let data = JSON.stringify(arrCart);
-    localStorage.setItem('mangCart',data);
+    localStorage.setItem('mangCart', data);
 }
 
 
 //get storage 
 function getStorage() {
-    
-    
-    if(localStorage.getItem('mangCart')) {
+
+
+    if (localStorage.getItem('mangCart')) {
         let data = localStorage.getItem('mangCart');
         arrCart = JSON.parse(data);
         renderCart(arrCart);
@@ -497,6 +512,8 @@ function getStorage() {
 
 getStorage();
 
+
+//select size
 
 
 
@@ -516,27 +533,27 @@ const headerMenu = document.getElementById("header");
 
 // Toggle Navbar Menu on Burger Click
 if (burgerMenu && navbarMenu) {
-   burgerMenu.addEventListener("click", () => {
-      burgerMenu.classList.toggle("is-active");
-      navbarMenu.classList.toggle("is-active");
-   });
+    burgerMenu.addEventListener("click", () => {
+        burgerMenu.classList.toggle("is-active");
+        navbarMenu.classList.toggle("is-active");
+    });
 }
 
 // Closed Navbar Menu on Links Click
 document.querySelectorAll(".menu-link").forEach((link) => {
-   link.addEventListener("click", () => {
-      burgerMenu.classList.remove("is-active");
-      navbarMenu.classList.remove("is-active");
-   });
+    link.addEventListener("click", () => {
+        burgerMenu.classList.remove("is-active");
+        navbarMenu.classList.remove("is-active");
+    });
 });
 
 // Fixed Navbar Menu on Window Resize
 window.addEventListener("resize", () => {
-   if (window.innerWidth >= 769) {
-      if (navbarMenu.classList.contains("is-active")) {
-         navbarMenu.classList.remove("is-active");
-      }
-   }
+    if (window.innerWidth >= 769) {
+        if (navbarMenu.classList.contains("is-active")) {
+            navbarMenu.classList.remove("is-active");
+        }
+    }
 });
 
 
