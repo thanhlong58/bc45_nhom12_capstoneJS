@@ -40,7 +40,7 @@ function renDerSP (mangSp) {
     for (var index= 0 ; index < mangSp.length;index++ ) {
         var sp = mangSp [index];
         htmlContent +=`
-        <div  id="sneaker" class="grow col-xl-2 col-md-3 col-sm-6 col-12"  onclick="window.location='./detail.html?productid=${sp.id}';">
+        <div style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;" id="sneaker" class="mt-3 grow col-xl-2 col-md-3 col-sm-6 col-12"  onclick="window.location='./detail.html?productid=${sp.id}';">
        
         <div class="product-grid2">
             <div class="product-image2">

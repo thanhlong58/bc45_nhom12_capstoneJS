@@ -336,6 +336,7 @@ img {
 // Header Section
 
 .float-shadow {
+   
    display: inline-block;
 	position: relative;
 	transition-duration: $defaultDuration;
@@ -525,6 +526,8 @@ img {
 
 // Wrapper Section
 #img-product {
+   
+  object-fit: cover;
  
    transition: all 1.5s ease-in-out 0s;
    &:hover {
@@ -660,6 +663,9 @@ img {
       }
    }
 }
+
+//related items
+
 
 //footer
 

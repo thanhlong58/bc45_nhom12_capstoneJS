@@ -450,6 +450,7 @@ img {
 }
 
 #img-product {
+  object-fit: cover;
   transition: all 1.5s ease-in-out 0s;
 }
 #img-product:hover {

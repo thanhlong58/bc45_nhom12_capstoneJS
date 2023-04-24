@@ -133,10 +133,10 @@ function renderDetail(mangSP) {
 
 
 
-        htmlContent = `
-        <section class="section wrapper wrapper-section">
+        htmlContent += `
+        <section  class="section wrapper wrapper-section">
         <div class="container wrapper-column">
-           <div class="wrapper-figure">
+           <div  class="wrapper-figure">
               <img id="img-product" src="${sp.image}" class="wrapper-image" loading="lazy" alt="Sneaker">
            </div>
            <div class="wrapper-content">
@@ -191,16 +191,18 @@ function renderDetail(mangSP) {
 
 function renderRelatedItems(mangRelated) {
     var htmlOut = '';
+    var animationClasses = ['animate__fadeInLeft', 'animate__fadeInUp', 'animate__fadeInRight','animate__fadeInLeft','animate__fadeInUp'];
 
 
     for (var index = 0; index < mangRelated.length; index++) {
         var relatedItem = mangRelated[index];
+        var animationClass = animationClasses[index % animationClasses.length]; 
         htmlOut += `
 
         
        
        
-        <div class=" float-shadow col-md-4 col-sm-6"  onclick="window.location='./detail.html?productid=${relatedItem.id}';">
+        <div class="animate__animated ${animationClass} float-shadow col-md-4 col-sm-6" onclick="window.location='./detail.html?productid=${relatedItem.id}';">
        
             <div class="product-grid2">
                 <div class="product-image2">
@@ -234,8 +236,10 @@ function renderRelatedItems(mangRelated) {
 
   
         `
+        
 
     }
+    
     document.querySelector('#related-items').innerHTML = htmlOut;
     return htmlOut;
 }
