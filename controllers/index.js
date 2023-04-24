@@ -94,7 +94,7 @@ function rotateSpinner() {
     angle += 45;
     spinner.setAttribute("style", "-webkit-transform: rotateY(" + angle + "deg); -moz-transform: rotateY(" + angle + "deg); transform: rotateY(" + angle + "deg);");
   }
-  setInterval(rotateSpinner, 3000);
+  setInterval(rotateSpinner, 2000);
 //loc san pham 
 
 document.querySelector('#chonSP').onchange = function () {

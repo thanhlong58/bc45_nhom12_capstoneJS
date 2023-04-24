@@ -646,6 +646,11 @@ img {
    }
 }
 //carousel 
+#spinner img {
+   height: 300px; /* set the desired height */
+   object-fit: cover; /* maintain aspect ratio */
+   
+ }
 div#carousel {
    perspective: 1200px;
    background: #100000;
@@ -655,12 +660,14 @@ div#carousel {
    overflow: hidden;
  
    figure#spinner {
+      
      transform-style: preserve-3d;
      height: 300px;
      transform-origin: 50% 50% -500px;
      transition: 1s;
  
      img {
+      border: none;
        width: 40%;
        max-width: 425px;
        position: absolute;

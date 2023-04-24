@@ -561,6 +561,11 @@ img {
   background-color: var(--brown-500);
 }
 
+#spinner img {
+  height: 300px; /* set the desired height */
+  object-fit: cover; /* maintain aspect ratio */
+}
+
 div#carousel {
   perspective: 1200px;
   background: #100000;
@@ -576,6 +581,7 @@ div#carousel figure#spinner {
   transition: 1s;
 }
 div#carousel figure#spinner img {
+  border: none;
   width: 40%;
   max-width: 425px;
   position: absolute;
